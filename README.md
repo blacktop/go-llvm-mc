@@ -60,3 +60,11 @@ $ go run main.go disassemble kernelcache.release.iphone11.decompressed | less
 	lsr	x9, x9, #5
         <SNIP>
 ```
+
+=OR=
+
+Just use `llvm-objdump`
+
+```bash
+$ llvm-objdump -arch=arm64 -mattr=v8.5a -d kernelcache.release.iphone11.decompressed | less
+```
