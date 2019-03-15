@@ -27,7 +27,7 @@ $ go run main.go disassemble kernelcache.release.iphone11.decompressed | less
 ```
 
 ```asm
-	.section	__TEXT,__text,regular,pure_instructions
+	.section	__TEXT_EXEC,__text,regular,pure_instructions
 	mov	x0, #29313
 	movk	x0, #28518, lsl #16
 	movk	x0, #28786, lsl #32
