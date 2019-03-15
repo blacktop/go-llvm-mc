@@ -19,31 +19,6 @@ import (
 	"github.com/urfave/cli"
 )
 
-func Dump(r *bufio.Reader) string {
-
-	var err error
-
-	if r == nil {
-		return ""
-	}
-
-	var buf strings.Builder
-	buf.Grow(r.Size() * 4)
-
-	leBuff := make([]byte, 4)
-
-	for {
-		err = binary.Read(r, binary.LittleEndian, &leBuff)
-		if err == io.EOF {
-			break
-		}
-
-		buf.WriteString(fmt.Sprintf("%#02x %#02x %#02x %#02x ", leBuff[0], leBuff[1], leBuff[2], leBuff[3]))
-	}
-
-	return buf.String()
-}
-
 func main() {
 	app := cli.NewApp()
 
@@ -66,6 +41,20 @@ func main() {
 			Name:    "disassemble",
 			Aliases: []string{"d"},
 			Usage:   "disassemble binary",
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:   "arch",
+					Value:  "arm64",
+					Usage:  "Architecture",
+					EnvVar: "LLVMMC_ARCH",
+				},
+				cli.StringFlag{
+					Name:   "mattr",
+					Value:  "v8.5a",
+					Usage:  "Machine Attributes",
+					EnvVar: "LLVMMC_MATTR",
+				},
+			},
 			Action: func(c *cli.Context) error {
 
 				if c.Args().Present() {
@@ -78,7 +67,7 @@ func main() {
 					defer cancel()
 
 					// disass := exec.CommandContext(ctx, "llvm-mc", "-disassemble", "-arch=arm64", "-mattr=v8.3a", "-show-encoding")
-					disass := exec.CommandContext(ctx, "llvm-mc", "-disassemble", "-arch=arm64", "-mattr=v8.5a")
+					disass := exec.CommandContext(ctx, "llvm-mc", "-disassemble", "-arch="+c.String("arch"), "-mattr="+c.String("mattr"))
 					stdin, err := disass.StdinPipe()
 					if err != nil {
 						return err
