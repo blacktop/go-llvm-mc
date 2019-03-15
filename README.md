@@ -23,7 +23,31 @@ $ cp /tmp/llvm/bin/llvm-mc /usr/local/bin/llvm-mc
 ## Getting Started
 
 ```bash
-$ go run main.go disassemble kernelcache.release.iphone11.decompressed | less
+NAME:
+   main - A new cli application
+
+USAGE:
+   main [global options] command [command options] [arguments...]
+
+VERSION:
+   0.0.0
+
+COMMANDS:
+     assemble, a     convert ASM to binary
+     disassemble, d  disassemble binary
+     help, h         Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --count value, -c value  number of instructions to print (default: 500)
+   --timeout value          timeout (in seconds) (default: 45) [$LLVMMC_TIMEOUT]
+   --help, -h               show help
+   --version, -v            print the version
+```
+
+### `disassemble`
+
+```bash
+$ go run main.go --count 1000 disassemble kernelcache.release.iphone11.decompressed | less
 ```
 
 ```asm

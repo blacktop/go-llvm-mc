@@ -50,13 +50,14 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.IntFlag{
 			Name:   "timeout",
-			Value:  60,
+			Value:  45,
 			Usage:  "timeout (in seconds)",
 			EnvVar: "LLVMMC_TIMEOUT",
 		},
-		cli.StringFlag{
-			Name:  "config, c",
-			Usage: "Load configuration from `FILE`",
+		cli.IntFlag{
+			Name:  "count, c",
+			Value: 500,
+			Usage: "number of instructions to print",
 		},
 	}
 
@@ -92,7 +93,7 @@ func main() {
 						// fmt.Println(sec.Name, sec.Seg)
 						if strings.EqualFold(sec.Name, "__text") && strings.EqualFold(sec.Seg, "__TEXT_EXEC") {
 							go func() {
-								instCount := 1000
+								instCount := c.GlobalInt("count")
 								defer stdin.Close()
 								r := bufio.NewReader(sec.Open())
 								leBuff := make([]byte, 4)
