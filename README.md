@@ -15,7 +15,7 @@ $ git clone https://github.com/llvm/llvm-project.git
 $ cd llvm-project
 $ mkdir build
 $ cd build
-$ cmake ../llvm -DLLVM_ENABLE_PROJECTS='llvm-mc' -DCMAKE_INSTALL_PREFIX=/tmp/llvm
+$ cmake ../llvm -DLLVM_ENABLE_PROJECTS='llvm-objdump,llvm-mc' -DCMAKE_INSTALL_PREFIX=/tmp/llvm
 $ make install
 $ cp /tmp/llvm/bin/llvm-mc /usr/local/bin/llvm-mc
 ```
