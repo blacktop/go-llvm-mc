@@ -8,6 +8,18 @@
 
 - [llvm-mc](https://github.com/llvm/llvm-project/tree/master/llvm/tools/llvm-mc)
 
+### Install `llvm-mc`
+
+```bash
+$ git clone https://github.com/llvm/llvm-project.git
+$ cd llvm-project
+$ mkdir build
+$ cd build
+$ cmake ../llvm -DLLVM_ENABLE_PROJECTS='llvm-mc' -DCMAKE_INSTALL_PREFIX=/tmp/llvm
+$ make install
+$ cp /tmp/llvm/bin/llvm-mc /usr/local/bin/llvm-mc
+```
+
 ## Getting Started
 
 ```bash
