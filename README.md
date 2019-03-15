@@ -47,6 +47,20 @@ GLOBAL OPTIONS:
 ### `disassemble`
 
 ```bash
+NAME:
+   main disassemble - disassemble binary
+
+USAGE:
+   main disassemble [command options] [arguments...]
+
+OPTIONS:
+   --arch value   Architecture (default: "arm64") [$LLVMMC_ARCH]
+   --mattr value  Machine Attributes (default: "v8.5a") [$LLVMMC_MATTR]
+```
+
+#### Example
+
+```bash
 $ go run main.go --count 1000 disassemble kernelcache.release.iphone11.decompressed | less
 ```
 
@@ -87,7 +101,7 @@ $ go run main.go --count 1000 disassemble kernelcache.release.iphone11.decompres
 
 =OR=
 
-Just use `llvm-objdump`
+#### Just use `llvm-objdump`
 
 ```bash
 $ llvm-objdump -arch=arm64 -mattr=v8.5a -d kernelcache.release.iphone11.decompressed | less
