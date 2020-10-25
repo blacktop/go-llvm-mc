@@ -18,3 +18,7 @@ $ cstool arm64 "41 01 80 d2 c0 03 5f d6"
  0  41 01 80 d2  movz   x1, #0xa
  4  c0 03 5f d6  ret
 ```
+
+```bash
+$ echo "0xd6 0x30 0xf0 0xd5" | /usr/local/opt/llvm/bin/llvm-mc -disassemble -arch=arm64 -mattr=v8.5a 
+```
